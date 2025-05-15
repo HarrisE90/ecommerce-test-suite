@@ -1,9 +1,9 @@
-export const loginFixture = {
+export const users = {
   admin: {
     username: 'admin@practicesoftwaretesting.com',
     password: 'welcome01'
   },
-  user: {
+  standard: {
     username: 'customer@practicesoftwaretesting.com',
     password: 'welcome01'
   },
