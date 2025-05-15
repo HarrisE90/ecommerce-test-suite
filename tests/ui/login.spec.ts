@@ -2,32 +2,76 @@ import { test, expect } from '@playwright/test';
 import { LoginPage } from '../../pages/loginPage';
 import { users } from '../../fixtures/loginFixture';
 
-test.describe('Login UI Tests', () => {
+/**
+ * Set timeout for all tests to account for potential network/rendering delays
+ */
+test.setTimeout(30000);
+
+/**
+ * Test suite for the login functionality
+ * Tests both successful and unsuccessful login attempts
+ * including admin, standard user, and invalid credentials
+ */
+test.describe('Login Functionality', () => {
   let loginPage: LoginPage;
 
+  /**
+   * Before each test:
+   * - Initialize the LoginPage
+   * - Navigate to the login page
+   * - Ensure proper page loading
+   */
   test.beforeEach(async ({ page }) => {
     loginPage = new LoginPage(page);
     await loginPage.goto();
+    await page.waitForLoadState('networkidle');
   });
 
-  test('admin login (happy path)', async () => {
+  /**
+   * Test: Admin login happy path
+   * 
+   * Verifies that:
+   * - Admin user can login successfully
+   * - Admin is redirected to admin dashboard
+   */
+  test('should allow admin to login successfully', async () => {
     const { admin } = users;
     await loginPage.login(admin.username, admin.password);
-    // Admin users go to the admin dashboard
-    await expect(loginPage.page).toHaveURL(/admin\/dashboard/);
+    
+    // Verify redirect to admin dashboard
+    await loginPage.verifyRedirect(/admin\/dashboard/);
   });
 
-  test('regular user login (happy path)', async () => {
+  /**
+   * Test: Standard user login happy path
+   * 
+   * Verifies that:
+   * - Standard user can login successfully
+   * - User is redirected to account page
+   */
+  test('should allow standard user to login successfully', async () => {
     const { standard } = users;
     await loginPage.login(standard.username, standard.password);
-    // Regular users go to the account page
-    await expect(loginPage.page).toHaveURL(/account$/);
+    
+    // Verify redirect to account page
+    await loginPage.verifyRedirect(/account$/);
   });
 
-  test('invalid login (sad path)', async () => {
+  /**
+   * Test: Invalid login sad path
+   * 
+   * Verifies that:
+   * - Invalid credentials show error message
+   * - User remains on login page
+   */
+  test('should show error message with invalid credentials', async () => {
     const { invalid } = users;
     await loginPage.login(invalid.username, invalid.password);
-    // Expect error message to be visible
+    
+    // Verify error message is displayed
     await expect(loginPage.errorMessage).toBeVisible();
+    
+    // Verify user is still on login page
+    await loginPage.verifyRedirect(/auth\/login/);
   });
 }); 
