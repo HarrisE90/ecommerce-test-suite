@@ -10,17 +10,24 @@ test.describe('Login UI Tests', () => {
     await loginPage.goto();
   });
 
-  test('valid login (happy path)', async () => {
-    const { valid } = loginFixture;
-    await loginPage.login(valid.username, valid.password);
-    // (Assume that a successful login redirects to a dashboard or home page.)
-    await expect(loginPage.page).toHaveURL(/.*dashboard/);
+  test('admin login (happy path)', async () => {
+    const { admin } = loginFixture;
+    await loginPage.login(admin.username, admin.password);
+    // Admin users go to the admin dashboard
+    await expect(loginPage.page).toHaveURL(/admin\/dashboard/);
+  });
+
+  test('regular user login (happy path)', async () => {
+    const { user } = loginFixture;
+    await loginPage.login(user.username, user.password);
+    // Regular users go to the account page
+    await expect(loginPage.page).toHaveURL(/account$/);
   });
 
   test('invalid login (sad path)', async () => {
     const { invalid } = loginFixture;
     await loginPage.login(invalid.username, invalid.password);
-    // (Assume that an error message is shown.)
+    // Expect error message to be visible
     await expect(loginPage.errorMessage).toBeVisible();
   });
 }); 
