@@ -36,7 +36,7 @@ export class ProductBrowsingPage {
   private increaseQuantityButton: Locator;
   private decreaseQuantityButton: Locator;
   private addToCartButton: Locator;
-  
+
   // Alert and notifications
   private addedToCartAlert: Locator;
 
@@ -181,8 +181,8 @@ export class ProductBrowsingPage {
   async getProductNames(): Promise<string[]> {
     try {
       const products = await this.page.locator('[data-test^="product-"] [data-test="product-name"]').all();
-      const names: string[] = [];
-      
+    const names: string[] = [];
+    
       for (const product of products) {
         const text = await product.textContent();
         if (text !== null) {
@@ -193,15 +193,15 @@ export class ProductBrowsingPage {
       // If names array is empty, try alternative selectors
       if (names.length === 0) {
         const count = await this.productTitle.count();
-        for (let i = 0; i < count; i++) {
+    for (let i = 0; i < count; i++) {
           const text = await this.productTitle.nth(i).textContent();
           if (text) {
             names.push(text.trim());
           }
         }
-      }
-      
-      return names;
+    }
+    
+    return names;
     } catch (error) {
       console.log(`Error getting product names: ${error}`);
       return [];
