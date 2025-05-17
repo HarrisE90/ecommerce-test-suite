@@ -1,3 +1,7 @@
+/**
+ * Test data for product browsing and checkout tests
+ */
+
 export const products = {
   popular: [
     {
@@ -65,6 +69,19 @@ export const products = {
       'Safety Gear',
       'Fasteners'
     ]
+  },
+  // Product with known ID from the codegen
+  combinationPliers: {
+    id: '01JVAASNQCT1J5QG7X8PD489S7',
+    name: 'Combination Pliers',
+    category: 'Pliers',
+    price: '14.15'
+  },
+  pliers: {
+    id: '01JVAASNQRNZX4Z4YMG36WFKRQ',
+    name: 'Pliers',
+    category: 'Pliers',
+    price: '9.99'
   }
 };
 
@@ -72,23 +89,25 @@ export const userInfo = {
   validCheckout: {
     firstName: 'Test',
     lastName: 'User',
-    address: '123 Test Street',
+    address: '123 Test St',
     city: 'Test City',
-    state: 'TS',
+    state: 'Test State',
     postcode: '12345',
     country: 'US',
+    bankName: 'Test Bank',
     accountName: 'Test User',
     accountNumber: '1234567890'
   },
   invalidCheckout: {
-    firstName: '',
-    lastName: '',
-    address: '',
-    city: '',
-    state: '',
-    postcode: '',
-    country: '',
-    accountName: '',
-    accountNumber: ''
+    firstName: 'Test',
+    lastName: 'User',
+    address: '123 Test St',
+    city: 'Test City',
+    state: 'Test State',
+    postcode: '12345',
+    country: 'US',
+    bankName: 'Invalid Bank',
+    accountName: 'Invalid',
+    accountNumber: '000000'
   }
 }; 
