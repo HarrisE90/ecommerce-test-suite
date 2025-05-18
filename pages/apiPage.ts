@@ -1,5 +1,5 @@
 import { APIRequestContext, APIResponse, expect } from '@playwright/test';
-import { apiConfig, endpoints } from '../../config/apiConfig';
+import { apiConfig, endpoints } from '../config/apiConfig';
 import { validateSchema, assertResponseTime, retryOnError } from '../utils/apiTestUtils';
 
 /**

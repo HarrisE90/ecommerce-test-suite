@@ -6,7 +6,8 @@
 import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
 import { expect } from '@playwright/test';
-import { apiConfig } from '../../config/apiConfig';
+import { apiConfig } from '../config/apiConfig'; 
+
 
 // Initialize Ajv with formats
 const ajv = new Ajv({ allErrors: true });

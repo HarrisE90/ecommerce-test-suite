@@ -7,6 +7,7 @@
     "test:ui": "playwright test tests/ui/",
     "test:api": "playwright test tests/api/",
     "test:integration": "playwright test tests/integration/",
+    "test:integration:core": "playwright test tests/integration/product-search-integration.spec.ts tests/integration/user-account-integration.spec.ts tests/integration/api-verification-integration.spec.ts",
     "report": "playwright show-report"
   },
   "dependencies": {

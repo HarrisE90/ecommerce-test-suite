@@ -41,7 +41,7 @@ test.describe('API Error Handling Tests', () => {
     expect(response.status).toBe(404);
     
     // Verify error structure and message
-    expect(response.data).toHaveProperty('error');
+      expect(response.data).toHaveProperty('error');
     expect(response.data.error).toBe('User not found');
   });
 
@@ -60,7 +60,7 @@ test.describe('API Error Handling Tests', () => {
     expect(response.status).toBe(404);
     
     // Verify error structure and message
-    expect(response.data).toHaveProperty('error');
+      expect(response.data).toHaveProperty('error');
     expect(response.data.error).toBe('Product not found');
   });
 
@@ -79,7 +79,7 @@ test.describe('API Error Handling Tests', () => {
     expect(response.status).toBe(400);
     
     // Verify error structure
-    expect(response.data).toHaveProperty('errors');
+      expect(response.data).toHaveProperty('errors');
     expect(Array.isArray(response.data.errors)).toBeTruthy();
     expect(response.data.errors.length).toBe(3);
     
@@ -104,7 +104,7 @@ test.describe('API Error Handling Tests', () => {
     expect(loginResponse.status).toBe(401);
     
     // Verify error structure
-    expect(loginResponse.data).toHaveProperty('error');
+      expect(loginResponse.data).toHaveProperty('error');
     expect(loginResponse.data.error).toBe('Invalid credentials');
   });
 
@@ -126,7 +126,7 @@ test.describe('API Error Handling Tests', () => {
     expect(rateLimitedResponse.status).toBe(429);
     expect(rateLimitedResponse.data).toHaveProperty('error');
     expect(rateLimitedResponse.data.error).toBe('Too many requests');
-    expect(rateLimitedResponse.headers).toHaveProperty('retry-after');
+      expect(rateLimitedResponse.headers).toHaveProperty('retry-after');
     expect(rateLimitedResponse.headers['retry-after']).toBe('30');
   });
 }); 
